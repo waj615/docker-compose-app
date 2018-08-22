@@ -13,7 +13,7 @@ ENV     WORK=/fastdfs \
         PATH=/fastdfs:${PATH}
 
 RUN     apk update && apk add --no-cache --virtual .build-deps bash gcc libc-dev make \
-        openssl-dev pcre-dev zlib-dev linux-headers curl gnupg libxslt-dev gd-dev geoip-dev \
+        openssl-dev pcre-dev zlib-dev linux-headers curl gnupg libxslt-dev gd-dev geoip-dev gd-devel.x86_64\
         && cd ${WORK}/libfastcommon-1.0.36/ \
         && ./make.sh \
         && ./make.sh install \
@@ -33,7 +33,7 @@ RUN     apk update && apk add --no-cache --virtual .build-deps bash gcc libc-dev
         && cd ${WORK} \
         && chmod u+x ${WORK}/fastdfs-nginx-module-master/src/config \
         && cd nginx-${NGINX_VERSION} \
-        && ./configure --add-module=${WORK}/fastdfs-nginx-module-master/src \
+        && ./configure --add-module=${WORK}/fastdfs-nginx-module-master/src --with-http_image_filter_module \
         && make && make install \
         && \
         cp ${WORK}/fastdfs-nginx-module-master/src/mod_fastdfs.conf /etc/fdfs/ \

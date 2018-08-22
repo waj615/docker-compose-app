@@ -3,7 +3,7 @@ version: "2"
 services:
   tracker:
     container_name: fdfs_tracker
-    image: waj615/fdfs-centos:5.11
+    image: waj615/fdfs:5.11
     restart: always
     environment:
       - TRACKER_PORT=22122
@@ -14,7 +14,7 @@ services:
 
   storage:
     container_name: fdfs_storage
-    image: waj615/fdfs-centos:5.11
+    image: waj615/fdfs:5.11
     restart: always
     environment:
       # tracker server地址可多个，多个时候变量加数字即可

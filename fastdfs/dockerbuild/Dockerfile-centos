@@ -43,7 +43,7 @@ RUN     cd ${WORK}/libfastcommon-1.0.36/ \
         && sed -i "s|/home/yuqing/fastdfs|${BASE_PATH}/tracker|g" /etc/fdfs/tracker.conf \
         && sed -i "s|/home/yuqing/fastdfs|${BASE_PATH}/storage|g" /etc/fdfs/storage.conf \
         && sed -i "s|/home/yuqing/fastdfs|${BASE_PATH}/storage|g" /etc/fdfs/client.conf 
-
+RUN yum -y install gd-devel.x86_64
 # 获取nginx源码，与fastdfs插件一起编译
 # RUN     cd ${WORK} \
 #         && curl -fSL http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz -o nginx-${NGINX_VERSION}.tar.gz \
@@ -57,7 +57,7 @@ RUN     cd ${WORK}/libfastcommon-1.0.36/ \
 RUN     cd ${WORK} \
         && chmod u+x ${WORK}/fastdfs-nginx-module-master/src/config \
         && cd nginx-${NGINX_VERSION} \
-        && ./configure --add-module=${WORK}/fastdfs-nginx-module-master/src \
+        && ./configure --add-module=${WORK}/fastdfs-nginx-module-master/src --with-http_image_filter_module \
         && make && make install \
         && \
         cp ${WORK}/fastdfs-nginx-module-master/src/mod_fastdfs.conf /etc/fdfs/ \

@@ -1,0 +1,13 @@
+version: "2"
+services:
+  tracker:
+    container_name: fdfs_tracker
+    image: waj615/fdfs-centos:5.11
+    restart: always
+    environment:
+      - TRACKER_PORT=22122
+    network_mode: "host"
+    volumes:
+      - ./tracker:/var/local/fdfs/tracker
+    command: tracker
+

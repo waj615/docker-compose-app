@@ -17,15 +17,15 @@ ENV     WORK=/fastdfs \
 #         openssl-dev pcre-dev zlib-dev linux-headers curl gnupg libxslt-dev gd-dev geoip-dev
 
 # 下载fastdfs、libfastcommon、nginx插件的源码
-#ADD *.tar.gz *.sh ${WORK}/
+ADD *.tar.gz *.sh ${WORK}/
 
-RUN     cd /${WORK}} \
-        && curl -fSL  https://github.com/happyfish100/libfastcommon/archive/V1.0.39.tar.gz -o fastcommon.tar.gz \
-        && curl -fSL  https://codeload.github.com/happyfish100/fastdfs/tar.gz/V5.11 -o fastfs.tar.gz \
-        && curl -fSL  https://github.com/happyfish100/fastdfs-nginx-module/archive/master.tar.gz -o nginx-module.tar.gz \
-        && tar zxf fastcommon.tar.gz \
-        && tar zxf fastfs.tar.gz \
-        && tar zxf nginx-module.tar.gz
+#RUN     cd /${WORK}} \
+#        && curl -fSL  https://github.com/happyfish100/libfastcommon/archive/V1.0.39.tar.gz -o fastcommon.tar.gz \
+#        && curl -fSL  https://codeload.github.com/happyfish100/fastdfs/tar.gz/V5.11 -o fastfs.tar.gz \
+#        && curl -fSL  https://github.com/happyfish100/fastdfs-nginx-module/archive/master.tar.gz -o nginx-module.tar.gz \
+#        && tar zxf fastcommon.tar.gz \
+#        && tar zxf fastfs.tar.gz \
+#        && tar zxf nginx-module.tar.gz
 
 # 安装fdfs
 RUN     cd ${WORK}/libfastcommon/ \

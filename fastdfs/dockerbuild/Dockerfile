@@ -28,8 +28,8 @@ RUN     cd /${WORK}} \
         && tar zxf nginx-module.tar.gz
 
 # 安装fdfs
-RUN     cd ${WORK}/libfastcommon-1.0.36/ \
-        && chmod 777 make.sh \
+RUN     cd ${WORK}/libfastcommon/ \
+        && chmod 777 make.sh \ 
         && ./make.sh \
         && ./make.sh install 
 

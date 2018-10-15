@@ -28,13 +28,18 @@ ADD *.tar.gz *.sh ${WORK}/
 #         && tar zxf nginx-module.tar.gz
 
 # 安装fdfs
-RUN     cd ${WORK} \
-		&& tar zxf fastdfs-5.11.tar.gz
-RUN     cd ${WORK}/libfastcommon-1.0.36/ \
+#RUN     cd ${WORK} \
+#	&& tar zxf fastdfs-5.11.tar.gz
+RUN   ls \
+      && pwd
+
+RUN     cd ${WORK}/libfastcommon/ \
+        && chmod 777 make.sh \ 
         && ./make.sh \
-        && ./make.sh install \
-        && \
-        cd ${WORK}/fastdfs-5.11/ \
+        && ./make.sh install 
+
+RUN     cd ${WORK}/fastdfs/ \
+        && chmod 777 make.sh \  
         && ./make.sh \
         && ./make.sh install \
         && \ 

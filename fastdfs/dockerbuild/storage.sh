@@ -11,7 +11,7 @@ TRACKER_SERVER_LIST=$(env | grep TRACKER_SERVER | awk -F= '{print $2}')
 
 if [ -z "$TRACKER_SERVER_LIST" ];then
     logs "must defin tracker address!"
-    logs "use info: https://hub.docker.com/r/klzsysy/fdfs/"
+    logs "use info: https://hub.docker.com/r/waj615/fastdfs/"
     exit 1
 else
     for x in ${TRACKER_SERVER_LIST}
@@ -37,7 +37,7 @@ sed -i "s#^\(tracker_server\).*#${TRACKER_SERVERS}#" /etc/fdfs/storage.conf
 sed -i "s#^\(tracker_server\).*#${TRACKER_SERVERS}#" /etc/fdfs/client.conf
 
 sed -i "s#^\(http.server_port\).*#\1=$HTTP_SERVER_PORT#" /etc/fdfs/storage.conf
-
+#sed -i "s#^\(max_connections\).*#\1=$MAX_CONNECTIONS#" /etc/fdfs/storage.conf
 # sed -i "s#^\(base_path\).*#\1=$STORAGE_BASE_PATH#" /etc/fdfs/mod_fastdfs.conf
 # sed -i "s#^\(store_path0\).*#\1=$STORAGE_PATH0#" /etc/fdfs/mod_fastdfs.conf
 

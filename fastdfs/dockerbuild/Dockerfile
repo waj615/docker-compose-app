@@ -35,6 +35,8 @@ RUN     cd ${WORK}/libfastcommon/ \
 
 RUN     cd ${WORK}/fastdfs/ \
         && chmod 777 make.sh \
+        && mkdir -p /etc/fdfs \
+	&& cp -r conf/* /etc/fdfs/ \
         && ./make.sh \
         && ./make.sh install 
 		

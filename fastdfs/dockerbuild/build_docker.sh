@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build -t waj615/fdfs:5.11 .
+docker build -t waj615/fdfs:5.1101 .

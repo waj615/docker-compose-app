@@ -17,31 +17,31 @@ ENV     WORK=/fastdfs \
 #         openssl-dev pcre-dev zlib-dev linux-headers curl gnupg libxslt-dev gd-dev geoip-dev
 
 # 下载fastdfs、libfastcommon、nginx插件的源码
-ADD *.tar.gz *.sh ${WORK}/
+#ADD *.tar.gz *.sh ${WORK}/
 
-# RUN     mkdir ${WORK} && cd /${WORK}} \
-#         && curl -fSL  https://github.com/happyfish100/libfastcommon/archive/V1.0.36.tar.gz -o fastcommon.tar.gz \
-#         && curl -fSL  https://codeload.github.com/happyfish100/fastdfs/tar.gz/V5.11 -o fastfs.tar.gz \
-#         && curl -fSL  https://github.com/happyfish100/fastdfs-nginx-module/archive/master.tar.gz -o nginx-module.tar.gz \
-#         && tar zxf fastcommon.tar.gz \
-#         && tar zxf fastfs.tar.gz \
-#         && tar zxf nginx-module.tar.gz
+RUN     cd /${WORK}} \
+        && curl -fSL  https://github.com/happyfish100/libfastcommon/archive/V1.0.39.tar.gz -o fastcommon.tar.gz \
+        && curl -fSL  https://codeload.github.com/happyfish100/fastdfs/tar.gz/V5.11 -o fastfs.tar.gz \
+        && curl -fSL  https://github.com/happyfish100/fastdfs-nginx-module/archive/master.tar.gz -o nginx-module.tar.gz \
+        && tar zxf fastcommon.tar.gz \
+        && tar zxf fastfs.tar.gz \
+        && tar zxf nginx-module.tar.gz
 
 # 安装fdfs
-RUN     cd ${WORK} \
-		&& tar zxf fastdfs-5.11.tar.gz
 RUN     cd ${WORK}/libfastcommon-1.0.36/ \
+        && chmod 777 make.sh \
         && ./make.sh \
-        && ./make.sh install \
-        && \
-        cd ${WORK}/fastdfs-5.11/ \
+        && ./make.sh install 
+
+RUN     cd ${WORK}/fastdfs/ \
+        && chmod 777 make.sh \
         && ./make.sh \
         && ./make.sh install \
         && \ 
         cd /etc/fdfs/ \
-        && cp storage.conf.sample storage.conf \
-        && cp tracker.conf.sample tracker.conf \
-        && cp client.conf.sample client.conf \
+        && cp storage.conf storage.conf.sample \
+        && cp tracker.conf tracker.conf.sample \
+        && cp client.conf client.conf.sample \
         && sed -i "s|/home/yuqing/fastdfs|${BASE_PATH}/tracker|g" /etc/fdfs/tracker.conf \
         && sed -i "s|/home/yuqing/fastdfs|${BASE_PATH}/storage|g" /etc/fdfs/storage.conf \
         && sed -i "s|/home/yuqing/fastdfs|${BASE_PATH}/storage|g" /etc/fdfs/client.conf 
@@ -65,7 +65,7 @@ RUN     cd ${WORK} \
         cp ${WORK}/fastdfs-nginx-module-master/src/mod_fastdfs.conf /etc/fdfs/ \
         && sed -i "s|^store_path0.*$|store_path0=${BASE_PATH}/storage|g" /etc/fdfs/mod_fastdfs.conf \
         && sed -i "s|^url_have_group_name =.*$|url_have_group_name = true|g" /etc/fdfs/mod_fastdfs.conf \
-        && cd ${WORK}/fastdfs-5.11/conf/ \
+        && cd ${WORK}/fastdfs/conf/ \
         && cp http.conf mime.types anti-steal.jpg /etc/fdfs/
 
 COPY  nginx.conf /usr/local/nginx/conf/nginx.conf

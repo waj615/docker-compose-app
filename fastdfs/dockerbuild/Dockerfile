@@ -29,7 +29,7 @@ ADD *.tar.gz *.sh ${WORK}/
 
 # 安装fdfs
 RUN     cd ${WORK} \
-		&& tar zxf fastfs-5.11.tar.gz
+		&& tar zxf fastdfs-5.11.tar.gz
 RUN     cd ${WORK}/libfastcommon-1.0.36/ \
         && ./make.sh \
         && ./make.sh install \

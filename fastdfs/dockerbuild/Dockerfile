@@ -36,12 +36,9 @@ RUN     cd ${WORK}/libfastcommon/ \
 RUN     cd ${WORK}/fastdfs/ \
         && chmod 777 make.sh \
         && ./make.sh \
-        && ./make.sh install \
-        && \ 
-        cd /etc/fdfs/ \
-        && cp storage.conf storage.conf.sample \
-        && cp tracker.conf tracker.conf.sample \
-        && cp client.conf client.conf.sample \
+        && ./make.sh install 
+		
+RUN     cd /etc/fdfs/ \
         && sed -i "s|/home/yuqing/fastdfs|${BASE_PATH}/tracker|g" /etc/fdfs/tracker.conf \
         && sed -i "s|/home/yuqing/fastdfs|${BASE_PATH}/storage|g" /etc/fdfs/storage.conf \
         && sed -i "s|/home/yuqing/fastdfs|${BASE_PATH}/storage|g" /etc/fdfs/client.conf 

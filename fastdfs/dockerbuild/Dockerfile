@@ -7,7 +7,7 @@ RUN     yum install -y zlib zlib-devel pcre pcre-devel gcc gcc-c++ openssl \
         openssl-devel libevent libevent-devel perl unzip
 WORKDIR /fastdfs
 ENV     WORK=/fastdfs \
-        NGINX_VERSION='1.13.8' \
+        NGINX_VERSION='1.16.0' \
         HTTP_SERVER_PORT=8080 \
         STORAGE_PORT=23000 \
         BASE_PATH='/var/local/fdfs' \
